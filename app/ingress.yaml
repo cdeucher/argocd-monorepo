@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: helloword-service-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: nginx
+  namespace: dev2  
+spec:
+  rules:
+  - host: hello2.cabd.link
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: example2
+          servicePort: 80
+  - host: hello.cabd.link
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: example2
+          servicePort: 443 
