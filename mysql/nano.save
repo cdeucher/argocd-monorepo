@@ -1,0 +1,45 @@
+apiVersion: v1 items: - apiVersion: v1 kind: Pod metadata: annotations: kubectl.kubernetes.io/last-applied-configuration: | 
+        {"apiVersion":"v1","kind":"Pod","metadata":{"annotations":{},"labels":{"app.kubernetes.io/instance":"mysql"},"name":"mysql-client","namespace":"mysql"},"spec":{"containers":[{"command":["sh","-c","sleep 
+        1800m"],"image":"alpine","imagePullPolicy":"IfNotPresent","name":"mysql-container"}]}}
+    creationTimestamp: "2021-12-18T15:51:11Z" labels: app.kubernetes.io/instance: mysql name: mysql-client namespace: mysql resourceVersion: "51776" uid: 6ab07c9d-d876-4c1b-9ce3-c7b659822f88 spec: 
+    containers: - command:
+      - sh - -c - sleep 1800m image: alpine imagePullPolicy: IfNotPresent name: mysql-container resources: {} terminationMessagePath: /dev/termination-log terminationMessagePolicy: File volumeMounts: 
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-kxwmk readOnly: true dnsPolicy: ClusterFirst enableServiceLinks: true nodeName: minikube preemptionPolicy: PreemptLowerPriority priority: 0 restartPolicy: Always 
+    schedulerName: default-scheduler securityContext: {} serviceAccount: default serviceAccountName: default terminationGracePeriodSeconds: 30 tolerations: - effect: NoExecute
+      key: node.kubernetes.io/not-ready operator: Exists tolerationSeconds: 300 - effect: NoExecute key: node.kubernetes.io/unreachable operator: Exists tolerationSeconds: 300 volumes: - name: 
+    kube-api-access-kxwmk
+      projected: defaultMode: 420 sources: - serviceAccountToken: expirationSeconds: 3607 path: token - configMap: items: - key: ca.crt path: ca.crt name: kube-root-ca.crt - downwardAPI: items: - 
+            fieldRef:
+                apiVersion: v1 fieldPath: metadata.namespace path: namespace status: conditions: - lastProbeTime: null lastTransitionTime: "2021-12-18T15:51:11Z" status: "True" type: Initialized - 
+    lastProbeTime: null
+      lastTransitionTime: "2021-12-18T15:51:12Z" status: "True" type: Ready - lastProbeTime: null lastTransitionTime: "2021-12-18T15:51:12Z" status: "True" type: ContainersReady - lastProbeTime: null 
+      lastTransitionTime: "2021-12-18T15:51:11Z" status: "True" type: PodScheduled
+    containerStatuses: - containerID: docker://67c1043de948a2508ecc1c415460fe556a9a4036ed253d39ec5cc98cf42d2421 image: alpine:latest imageID: 
+      docker-pullable://alpine@sha256:21a3deaa0d32a8057914f36584b5288d2e5ecc984380bc0118285c70fa8c9300 lastState: {} name: mysql-container ready: true restartCount: 0 started: true state:
+        running: startedAt: "2021-12-18T15:51:11Z" hostIP: 192.168.49.2 phase: Running podIP: 172.17.0.10 podIPs: - ip: 172.17.0.10 qosClass: BestEffort startTime: "2021-12-18T15:51:11Z" - apiVersion: 
+v1
+  kind: Pod metadata: creationTimestamp: "2021-12-18T15:51:11Z" generateName: mysql-set- labels: app: mysql controller-revision-hash: mysql-set-78586965d5 statefulset.kubernetes.io/pod-name: 
+      mysql-set-0
+    name: mysql-set-0 namespace: mysql ownerReferences: - apiVersion: apps/v1 blockOwnerDeletion: true controller: true kind: StatefulSet name: mysql-set uid: 258926d3-9021-478d-a3b5-66e475001507 
+    resourceVersion: "51775" uid: e6538eee-8d2f-40f6-811e-034504e17f5d
+  spec: containers: - env: - name: MYSQL_ROOT_PASSWORD valueFrom: secretKeyRef: key: MYSQL_ROOT_PASSWORD name: mysql-password image: mysql:5.7 imagePullPolicy: IfNotPresent name: mysql ports: - 
+      containerPort: 3306
+        protocol: TCP resources: {} terminationMessagePath: /dev/termination-log terminationMessagePolicy: File volumeMounts: - mountPath: /var/lib/mysql name: mysql-store - mountPath: 
+      /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-w6m2j readOnly: true dnsPolicy: ClusterFirst enableServiceLinks: true hostname: mysql-set-0 nodeName: minikube preemptionPolicy: PreemptLowerPriority priority: 0 
+    restartPolicy: Always schedulerName: default-scheduler securityContext: {} serviceAccount: default serviceAccountName: default subdomain: mysql terminationGracePeriodSeconds: 10 tolerations: - 
+    effect: NoExecute
+      key: node.kubernetes.io/not-ready operator: Exists tolerationSeconds: 300 - effect: NoExecute key: node.kubernetes.io/unreachable operator: Exists tolerationSeconds: 300 volumes: - name: 
+    mysql-store
+      persistentVolumeClaim: claimName: mysql-store-mysql-set-0 - name: kube-api-access-w6m2j projected: defaultMode: 420 sources: - serviceAccountToken: expirationSeconds: 3607 path: token - 
+        configMap:
+            items: - key: ca.crt path: ca.crt name: kube-root-ca.crt - downwardAPI: items: - fieldRef: apiVersion: v1 fieldPath: metadata.namespace path: namespace status: conditions: - lastProbeTime: 
+    null
+      lastTransitionTime: "2021-12-18T15:51:12Z" status: "True" type: Initialized - lastProbeTime: null lastTransitionTime: "2021-12-18T15:51:12Z" message: 'containers with unready status: [mysql]' 
+      reason: ContainersNotReady status: "False" type: Ready
+    - lastProbeTime: null lastTransitionTime: "2021-12-18T15:51:12Z" message: 'containers with unready status: [mysql]' reason: ContainersNotReady status: "False" type: ContainersReady - 
+    lastProbeTime: null
+      lastTransitionTime: "2021-12-18T15:51:12Z" status: "True" type: PodScheduled containerStatuses: - image: mysql:5.7 imageID: "" lastState: {} name: mysql ready: false restartCount: 0 started: 
+      false state:
+        waiting: reason: ContainerCreating hostIP: 192.168.49.2 phase: Pending qosClass: BestEffort startTime: "2021-12-18T15:51:12Z" kind: List metadata: resourceVersion: "" selfLink: ""
